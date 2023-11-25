@@ -2,8 +2,8 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { FaHourglassStart } from "react-icons/fa";
-import characterMapping from "./characterMapping"; // Import the Alt codes mapping
-import TextHighlighter from "./TextHighlighter"; // Import the TextHighlighter component
+import characterMapping from "./characterMapping";
+import TextHighlighter from "./TextHighlighter"; 
 
 const HindiTypingSpace = ({
   sampleText,

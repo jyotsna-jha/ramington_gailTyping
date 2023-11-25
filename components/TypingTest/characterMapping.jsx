@@ -92,38 +92,22 @@ const characterMapping = {
   "=": "ृ",
   "+": "्",
   "|": "(",
-  "{": "क्ष",
+  "{": "क्ष्‍",
   "ॅ": "ँ",
   "ं": "",
   "\u0021": "!", // Alt+033 mapped to "!"
   "\u0022": '"', // Alt+034 mapped to "
-  "\u0023": "#", // Alt+035 mapped to #
-  "\u0024": "$", // Alt+036 mapped to $
   "\u0025": "%", // Alt+037 mapped to %
   "\u0026": "&", // Alt+038 mapped to &
   "\u0027": "'", // Alt+039 mapped to '
-  "\u0028": "(", // Alt+040 mapped to (
-  "\u0029": ")", // Alt+041 mapped to )
-  "\u002A": "*", // Alt+042 mapped to *
-  "\u002B": "+", // Alt+043 mapped to +
   "\u002C": ",", // Alt+044 mapped to ,
-  "\u002D": "-", // Alt+045 mapped to -
-  "\u002E": ".", // Alt+046 mapped to .
-  "\u002F": "/", // Alt+047 mapped to /
   "\u003A": ":", // Alt+058 mapped to :
   "\u003B": ";", // Alt+059 mapped to ;
   "\u003C": "<", // Alt+060 mapped to <
-  "\u003D": "=", // Alt+061 mapped to =
   "\u003E": ">", // Alt+062 mapped to >
-  "\u003F": "?", // Alt+063 mapped to ?
-  "\u0040": "@", // Alt+064 mapped to @
   "\u005C": "\\", // Alt+092 mapped to \
   "\u005D": "]", // Alt+093 mapped to ]
   "\u005E": "^", // Alt+094 mapped to ^
-  "\u005F": "_", // Alt+095 mapped to _
-  "\u0060": "`", // Alt+096 mapped to `
-  "\u007B": "{", // Alt+0123 mapped to {
-  "\u007C": "|", // Alt+0124 mapped to |
   "\u007D": "}", // Alt+0125 mapped to }
   "\u0082": ",", // Alt+0147 mapped to ,
   "\u0084": '"', // Alt+0148 mapped to "
@@ -148,13 +132,77 @@ const characterMapping = {
 
   /* conflict  */
   /*
-       "\u005B": "[",
+    1)   "\u005B": "[",
          "[": "ख्",
 
+  
+     2) "\u007B": "{",
+       "{": "क्ष्‍",
 
+    3)   "!": "|",  // it is also not working
+
+
+     4)  "\u002E": ".",
+       ".": "ण्"
+     
+    5) "/": "ध्",
+       "\u002F": "/",
+
+    6) "\u003F": "?",
+         "?": "घ्",
+
+    7) "\u0060": "`",
+        "`": "़",
+
+    8) "\u0040": "@",
+        "@":"/"
+
+    9) "#": ":",
+       "\u0023": "#",
+
+    10)  "\u0024": "$",
+           "$":"*"
+
+    11)  "*": "द्ध",
+        "\u002A": "*",
+
+    12) "(": "त्र",
+        "\u0028": "(", 
+        
+    13) ")": "ऋ"
+        "\u0029": ")"
+
+    14)  "\u002D": "-",
+         "-": ";",
+          
+
+    15) "\u005F": "_",
+         _: ".",
+         
+
+    16) "=": "ृ",
+        "\u003D": "=",
+
+  17)   "+": "्",
+        "\u002B": "+",
+
+  18) "|": "(",
+      "\u007C": "|",
+  
+
+/* about half characters */
+  /*  yeti characters lai matra complete garnu parne hunxa::
+    ख्
+    ण्
+    ध्
+    घ्
+    श्
+    ष्
+    भ्
+    थ्
+    क्ष्‍ 
+    example ::  ख्   + ा =ख
   */
-
-
 };
 
 export default characterMapping;
