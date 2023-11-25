@@ -145,7 +145,16 @@ const characterMapping = {
   "\u00DE": "Þ", // Alt+0222 mapped to Þ
   "\u00DF": "ß", // Alt+0223 mapped to ß
   "\u00F7": "÷", // Alt+0247 mapped to ÷
-  
+
+  /* conflict  */
+  /*
+       "\u005B": "[",
+         "[": "ख्",
+
+
+  */
+
+
 };
 
 export default characterMapping;
