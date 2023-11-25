@@ -53,6 +53,7 @@ const TestSetupForm = ({ onStartTest }) => {
               <option value="30">30 seconds</option>
               <option value="60">1 minute</option>
               <option value="180">3 minutes</option>
+              <option value="900">15 minutes</option>
             </select>
           </div>
 
