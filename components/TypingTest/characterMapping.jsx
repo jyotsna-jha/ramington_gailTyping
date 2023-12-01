@@ -7,11 +7,9 @@ const characterMapping = {
   d: "क",
   D: "क्",
   f: "ि",
-  F: "थ्",
   g: "ह",
   G: "ळ",
   h: "ी",
-  H: "भ्",
   j: "र",
   J: "श्र",
   k: "ा",
@@ -20,8 +18,6 @@ const characterMapping = {
   L: "स्",
   ";": "य",
   ":": "रु",
-  "'": "श्",
-  '"': "ष्",
   q: "ु",
   Q: "फ",
   w: "ू",
@@ -42,7 +38,6 @@ const characterMapping = {
   O: "व्",
   p: "च",
   P: "च्",
-  "[": "ख्",
   "]": "द्व",
   "\\": ")",
   "~": "द्य",
@@ -62,10 +57,7 @@ const characterMapping = {
   M: "ड",
   ",": "ए",
   "<": "ढ",
-  ".": "ण्",
   ">": "झ",
-  "/": "ध्",
-  "?": "घ्",
   "`": "़",
   1: "1",
   "!": "|",
@@ -92,36 +84,9 @@ const characterMapping = {
   "=": "ृ",
   "+": "्",
   "|": "(",
-  "{": "क्ष्‍",
-  "ॅ": "ँ",
-  "ं": "",
-  "\u0021": "!", // Alt+033 mapped to "!"
-  "\u0022": '"', // Alt+034 mapped to "
-  "\u0025": "%", // Alt+037 mapped to %
-  "\u0026": "&", // Alt+038 mapped to &
-  "\u0027": "'", // Alt+039 mapped to '
-  "\u002C": ",", // Alt+044 mapped to ,
-  "\u003A": ":", // Alt+058 mapped to :
-  "\u003B": ";", // Alt+059 mapped to ;
-  "\u003C": "<", // Alt+060 mapped to <
-  "\u003E": ">", // Alt+062 mapped to >
-  "\u005C": "\\", // Alt+092 mapped to \
-  "\u005D": "]", // Alt+093 mapped to ]
-  "\u005E": "^", // Alt+094 mapped to ^
-  "\u007D": "}", // Alt+0125 mapped to }
-  "\u0082": ",", // Alt+0147 mapped to ,
-  "\u0084": '"', // Alt+0148 mapped to "
-  "\u0085": "•", // Alt+0149 mapped to •
-  "\u0096": "–", // Alt+0150 mapped to –
-  "\u0097": "—", // Alt+0151 mapped to —
-  "\u0098": "~", // Alt+0152 mapped to ~
-  "\u0099": "™", // Alt+0153 mapped to ™
-  "\u009A": "š", // Alt+0154 mapped to š
-  "\u009B": "›", // Alt+0155 mapped to ›
-  "\u009C": "œ", // Alt+0156 mapped to œ
-  "\u00A9": "©", // Alt+0169 mapped to ©
-  "\u00B4": "´", // Alt+0184 mapped to ´
-  "\u00B9": "¹", // Alt+0185 mapped to ¹
+/*   "ॅ": "ँ",
+ */  "ं": "",
+  
   "\u00BD": "½", // Alt+0189 mapped to ½
   "\u00BE": "¾", // Alt+0190 mapped to ¾
   "\u00D7": "×", // Alt+0215 mapped to ×
@@ -129,80 +94,44 @@ const characterMapping = {
   "\u00DE": "Þ", // Alt+0222 mapped to Þ
   "\u00DF": "ß", // Alt+0223 mapped to ß
   "\u00F7": "÷", // Alt+0247 mapped to ÷
+  "\u0099": "™", // Alt+0153 mapped to ™
+  "\u009A": "š", // Alt+0154 mapped to š
+  "\u009B": "›", // Alt+0155 mapped to ›
+  "\u009C": "œ", // Alt+0156 mapped to œ
+  "\u00A9": "©", // Alt+0169 mapped to ©
+  "\u00B9": "¹", // Alt+0185 mapped to ¹
+  "\u0085": "•", // Alt+0149 mapped to •
 
-  /* conflict  */
-  /*
-    1)   "\u005B": "[",
-         "[": "ख्",
+  /*  half characters */
 
-  
-     2) "\u007B": "{",
-       "{": "क्ष्‍",
-
-    3)   "!": "|",  // it is also not working
-
-
-     4)  "\u002E": ".",
-       ".": "ण्"
-     
-    5) "/": "ध्",
-       "\u002F": "/",
-
-    6) "\u003F": "?",
-         "?": "घ्",
-
-    7) "\u0060": "`",
-        "`": "़",
-
-    8) "\u0040": "@",
-        "@":"/"
-
-    9) "#": ":",
-       "\u0023": "#",
-
-    10)  "\u0024": "$",
-           "$":"*"
-
-    11)  "*": "द्ध",
-        "\u002A": "*",
-
-    12) "(": "त्र",
-        "\u0028": "(", 
-        
-    13) ")": "ऋ"
-        "\u0029": ")"
-
-    14)  "\u002D": "-",
-         "-": ";",
-          
-
-    15) "\u005F": "_",
-         _: ".",
-         
-
-    16) "=": "ृ",
-        "\u003D": "=",
-
-  17)   "+": "्",
-        "\u002B": "+",
-
-  18) "|": "(",
-      "\u007C": "|",
-  
-
-/* about half characters */
-  /*  yeti characters lai matra complete garnu parne hunxa::
-    ख्
-    ण्
-    ध्
-    घ्
-    श्
-    ष्
-    भ्
-    थ्
-    क्ष्‍ 
-    example ::  ख्   + ा =ख
-  */
+  "'": "श्",
+  '"': "ष्",
+  "{": "क्ष्‍",
+  "/": "ध्",
+  "?": "घ्",
+  ".": "ण्",
+  F: "थ्",
+  H: "भ्",
+  "[": "ख्",
+  /* making half characters complete */
+  "[A": "ख",
+  "[k": "ख",
+  ".A": "ण",
+  ".k": "ण",
+  "/A": "ध",
+  "/k": "ध",
+  "?A": "घ",
+  "?k": " घ",
+  "'A": "श",
+  "'k": "श",
+  '"A"': "ष",
+  '"k"': "ष",
+  HA: "भ",
+  Hk: "भ",
+  FA: "थ",
+  Fk: "थ",
+  "{A": "क्ष",
+  "{k": "क्ष",
 };
 
 export default characterMapping;
