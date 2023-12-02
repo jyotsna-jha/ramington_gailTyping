@@ -25,19 +25,19 @@ const HindiTypingSpace = ({
       setBackspaceCount((prevCount) => prevCount + 1);
     }
 
-    if (e.altKey) {
+    /* if (e.altKey) {
       e.preventDefault();
-    }
+    } */
   };
 
-  const handleKeyUp = (e) => {
+  /* const handleKeyUp = (e) => {
     if (e.key === "Alt") {
       textAreaRef.current.value += " ";
       setUserInput(textAreaRef.current.value);
     }
-  };
+  }; */
 
-  useEffect(() => {
+ /*  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
 
@@ -45,7 +45,7 @@ const HindiTypingSpace = ({
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, []);
+  }, []); */
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -335,7 +335,7 @@ const HindiTypingSpace = ({
           value={userInput}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          onKeyUp={handleKeyUp}
+          
         />
       </div>
     </div>

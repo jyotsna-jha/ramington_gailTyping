@@ -101,6 +101,7 @@ const characterMapping = {
   "\u00A9": "©", // Alt+0169 mapped to ©
   "\u00B9": "¹", // Alt+0185 mapped to ¹
   "\u0085": "•", // Alt+0149 mapped to •
+  
 
   /*  half characters */
 
