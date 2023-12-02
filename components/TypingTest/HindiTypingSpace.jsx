@@ -47,60 +47,16 @@ const HindiTypingSpace = ({
     };
   }, []);
 
-  /*   const handleInputChange = (e) => {
-    if (timeLeft > 0) {
-      let inputValue = e.target.value;
-      inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
 
-      let newInput = "";
-
-      for (let i = 0; i < inputValue.length; i++) {
-        if (
-          (inputValue[i] === "A" || inputValue[i] === "k") &&
-          newInput[newInput.length - 1] === "अ"
-        ) {
-          newInput = newInput.slice(0, -1) + "आ";
-        } else if (inputValue[i] === "ॅ" && inputValue[i + 1] === "ं") {
-          newInput += "ँ";
-          i++;
-        } else {
-          const char = inputValue[i];
-          if (characterMapping[char]) {
-            newInput += characterMapping[char];
-          } else {
-            newInput += char;
-          }
-        }
-      }
-
-      setUserInput(newInput);
-
-      if (!hasStarted) {
-        setHasStarted(true);
-      }
-
-      if (
-        newInput.endsWith(" ") ||
-        highlightedWordIndex === words.length - 1
-      ) {
-        setHighlightedWordIndex((prevIndex) => prevIndex + 1);
-      } else if (!newInput.trim()) {
-        setHighlightedWordIndex(0);
-      }
-
-      const currentWord = words[highlightedWordIndex];
-      const typedWord = newInput.split(" ")[highlightedWordIndex];
-
-      if (currentWord === typedWord && highlightedWordIndex < words.length - 1) {
-        // Move to the next word
-        setHighlightedWordIndex((prevIndex) => prevIndex + 1);
-      } else if (highlightedWordIndex === words.length - 1 && currentWord === typedWord) {
-        // End of the test
-        setEndTime(Date.now());
-      }
+    if (minutes >= 1) {
+      return `${minutes} min`;
+    } else {
+      return `${remainingSeconds} sec`;
     }
-  };     
- */
+  };
 
   useEffect(() => {
     let timerInterval;
@@ -113,69 +69,6 @@ const HindiTypingSpace = ({
     return () => clearInterval(timerInterval);
   }, [hasStarted]);
 
-  /*  const handleInputChange = (e) => {
-    if (timeLeft > 0) {
-      let inputValue = e.target.value;
-      inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
-     
-        
-      let newInput = "";
-
-      for (let i = 0; i < inputValue.length; i++) {
-        if (
-          (inputValue[i] === "A" || inputValue[i] === "k") &&
-          newInput[newInput.length - 1] === "अ"
-        ) {
-          newInput = newInput.slice(0, -1) + "आ";
-        } else if (
-          inputValue[i] === "q" &&
-          newInput[newInput.length - 1] === "उ"
-        ) {
-          newInput = newInput.slice(0, -1) + "ऊ";
-        } else if (inputValue[i] === "ॅ" && inputValue[i + 1] === "ं") {
-          newInput += "ँ";
-          i++;
-        } else {
-          const char = inputValue[i];
-          if (characterMapping[char]) {
-            newInput += characterMapping[char];
-          } else {
-            newInput += char;
-          }
-        }
-      }
-
-      setUserInput(newInput);
-
-      if (!hasStarted) {
-        setHasStarted(true);
-      }
-
-      if (newInput.endsWith(" ") || highlightedWordIndex === words.length - 1) {
-        setHighlightedWordIndex((prevIndex) => prevIndex + 1);
-      } else if (!newInput.trim()) {
-        setHighlightedWordIndex(0);
-      }
-
-      const currentWord = words[highlightedWordIndex];
-      const typedWord = newInput.split(" ")[highlightedWordIndex];
-
-      if (
-        currentWord === typedWord &&
-        highlightedWordIndex < words.length - 1
-      ) {
-        // Move to the next word
-        setHighlightedWordIndex((prevIndex) => prevIndex + 1);
-      } else if (
-        highlightedWordIndex === words.length - 1 &&
-        currentWord === typedWord
-      ) {
-        // End of the test
-        setEndTime(Date.now());
-      }
-    }
-  };  */
-
   const handleInputChange = (e) => {
     if (timeLeft > 0) {
       console.log("Original inputValue:", e.target.value);
@@ -183,6 +76,7 @@ const HindiTypingSpace = ({
       inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
 
       // Handle "[A" and "[k" mappings
+     
       inputValue = inputValue.replace(
         /\[A/g,
         (match) => characterMapping[match] || match
@@ -191,6 +85,7 @@ const HindiTypingSpace = ({
         /\[k/g,
         (match) => characterMapping[match] || match
       );
+
       inputValue = inputValue.replace(
         /\.A/g,
         (match) => characterMapping[match] || match
@@ -253,7 +148,7 @@ const HindiTypingSpace = ({
       for (let i = 0; i < inputValue.length; i++) {
         const char = inputValue[i];
 
-        if (char === "[") {
+         if (char === "[") {
           const nextChar = inputValue[i + 1];
           if (nextChar === "A" || nextChar === "k") {
             newInput += characterMapping[char + nextChar] || char + nextChar;
@@ -261,7 +156,8 @@ const HindiTypingSpace = ({
           } else {
             newInput += char;
           }
-        } else if (char === ".") {
+        }
+         else if (char === ".") {
           const nextChar = inputValue[i + 1];
           if (nextChar === "A" || nextChar === "k") {
             newInput += characterMapping[char + nextChar] || char + nextChar;
@@ -366,7 +262,7 @@ const HindiTypingSpace = ({
       }
       console.log("Transformed inputValue:", inputValue);
     }
-  };
+  };  
 
   useEffect(() => {
     if (!userInput) {
@@ -419,9 +315,9 @@ const HindiTypingSpace = ({
       <h1 className="text-base md:text-lg py-2 font-semibold text-gray-600">
         Hi {userName}
       </h1>
-      <div className="flex items-center  text-[#e74c3c] font-semibold text-lg mb-4">
+      <div className="flex items-center text-[#e74c3c] font-semibold text-lg mb-4">
         <FaHourglassStart className="mr-2 text-xl" />
-        Timer: {timeLeft} seconds
+        Timer: {formatTime(timeLeft)}
       </div>
       {enableHighlight ? (
         <TextHighlighter sampleText={sampleText} userText={userInput} />

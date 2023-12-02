@@ -84,9 +84,9 @@ const characterMapping = {
   "=": "ृ",
   "+": "्",
   "|": "(",
-/*   "ॅ": "ँ",
- */  "ं": "",
-  
+  /*   "ॅ": "ँ",
+   */ "ं": "",
+
   "\u00BD": "½", // Alt+0189 mapped to ½
   "\u00BE": "¾", // Alt+0190 mapped to ¾
   "\u00D7": "×", // Alt+0215 mapped to ×
