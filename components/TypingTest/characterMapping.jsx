@@ -113,9 +113,9 @@ const characterMapping = {
   ".": "ण्",
   F: "थ्",
   H: "भ्",
-  "[": "ख्",
+   "[": "ख्", 
   /* making half characters complete */
-  "[A": "ख",
+    "[A": "ख",
   "[k": "ख",
   ".A": "ण",
   ".k": "ण",
@@ -132,7 +132,7 @@ const characterMapping = {
   FA: "थ",
   Fk: "थ",
   "{A": "क्ष",
-  "{k": "क्ष",
+  "{k": "क्ष",  
 };
 
 export default characterMapping;

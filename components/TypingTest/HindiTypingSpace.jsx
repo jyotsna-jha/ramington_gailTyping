@@ -52,7 +52,7 @@ const HindiTypingSpace = ({
     return () => clearInterval(timerInterval);
   }, [hasStarted]);
 
-  const handleInputChange = (e) => {
+    const handleInputChange = (e) => {
     if (timeLeft > 0) {
       console.log("Original inputValue:", e.target.value);
       let inputValue = e.target.value;
@@ -203,9 +203,12 @@ const HindiTypingSpace = ({
           newInput = newInput.slice(0, -1) + "आ";
         } else if (char === "W" && newInput[newInput.length - 1] === "आ") {
           newInput = newInput.slice(0, -1) + "ऑ";
-        } else if (char === "Z" && newInput[newInput.length - 1] === "इ") {
-          newInput = newInput.slice(0, -1) + "ई";
-        } else if (char === "q" && newInput[newInput.length - 1] === "उ") {
+        }else if (char === "W" && newInput[newInput.length - 1] === "आ") {
+          newInput = newInput.slice(0, -1) + "ऑ";
+        }
+         else if (char === "s" && newInput[newInput.length - 1] === "अ") {
+          newInput = newInput.slice(0, -1) + "ओ";
+        } else if (char === "Q" && newInput[newInput.length - 1] === "उ") {
           newInput = newInput.slice(0, -1) + "ऊ";
         } else if (char === "ॅ" && inputValue[i + 1] === "ं") {
           newInput += "ँ";
@@ -245,7 +248,15 @@ const HindiTypingSpace = ({
       }
       console.log("Transformed inputValue:", inputValue);
     }
-  };  
+  };    
+
+ 
+  
+  
+  // ... (rest of the code remains unchanged)
+  
+
+  
 
   useEffect(() => {
     if (!userInput) {
