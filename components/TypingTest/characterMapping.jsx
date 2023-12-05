@@ -115,7 +115,7 @@ const characterMapping = {
   H: "भ्",
    "[": "ख्",  
   /* making half characters complete */
-   "[A": "ख",
+  "[A": "ख",
   "[k": "ख", 
   ".A": "ण",
   ".k": "ण",

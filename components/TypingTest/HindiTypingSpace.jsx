@@ -24,11 +24,7 @@ const HindiTypingSpace = ({
     if (e.key === "Backspace") {
       setBackspaceCount((prevCount) => prevCount + 1);
     }
-
-    
   };
-
-  
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -52,14 +48,19 @@ const HindiTypingSpace = ({
     return () => clearInterval(timerInterval);
   }, [hasStarted]);
 
-    const handleInputChange = (e) => {
+  const handleInputChange = (e) => {
     if (timeLeft > 0) {
       console.log("Original inputValue:", e.target.value);
       let inputValue = e.target.value;
       inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
 
       // Handle "[A" and "[k" mappings
-     
+
+      inputValue = inputValue.replace(
+        /\[/g,
+        (match) => characterMapping[match] || match
+      );
+
       inputValue = inputValue.replace(
         /\[A/g,
         (match) => characterMapping[match] || match
@@ -131,7 +132,7 @@ const HindiTypingSpace = ({
       for (let i = 0; i < inputValue.length; i++) {
         const char = inputValue[i];
 
-         if (char === "[") {
+        if (char === "[") {
           const nextChar = inputValue[i + 1];
           if (nextChar === "A" || nextChar === "k") {
             newInput += characterMapping[char + nextChar] || char + nextChar;
@@ -139,8 +140,7 @@ const HindiTypingSpace = ({
           } else {
             newInput += char;
           }
-        }
-         else if (char === ".") {
+        } else if (char === ".") {
           const nextChar = inputValue[i + 1];
           if (nextChar === "A" || nextChar === "k") {
             newInput += characterMapping[char + nextChar] || char + nextChar;
@@ -203,10 +203,9 @@ const HindiTypingSpace = ({
           newInput = newInput.slice(0, -1) + "आ";
         } else if (char === "W" && newInput[newInput.length - 1] === "आ") {
           newInput = newInput.slice(0, -1) + "ऑ";
-        }else if (char === "W" && newInput[newInput.length - 1] === "आ") {
+        } else if (char === "W" && newInput[newInput.length - 1] === "आ") {
           newInput = newInput.slice(0, -1) + "ऑ";
-        }
-         else if (char === "s" && newInput[newInput.length - 1] === "अ") {
+        } else if (char === "s" && newInput[newInput.length - 1] === "अ") {
           newInput = newInput.slice(0, -1) + "ओ";
         } else if (char === "Q" && newInput[newInput.length - 1] === "उ") {
           newInput = newInput.slice(0, -1) + "ऊ";
@@ -248,15 +247,9 @@ const HindiTypingSpace = ({
       }
       console.log("Transformed inputValue:", inputValue);
     }
-  };    
+  };
 
- 
-  
-  
   // ... (rest of the code remains unchanged)
-  
-
-  
 
   useEffect(() => {
     if (!userInput) {
@@ -329,7 +322,6 @@ const HindiTypingSpace = ({
           value={userInput}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
-          
         />
       </div>
     </div>
