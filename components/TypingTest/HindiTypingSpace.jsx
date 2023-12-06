@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaHourglassStart } from "react-icons/fa";
 import characterMapping from "./characterMapping";
 import TextHighlighter from "./TextHighlighter";
+import useDebounce from "@/utils/useDebounce";
 
 const HindiTypingSpace = ({
   sampleText,
@@ -19,6 +20,183 @@ const HindiTypingSpace = ({
   const words = sampleText.split(" ");
   const [backspaceCount, setBackspaceCount] = useState(0);
   const textAreaRef = useRef(null);
+
+  function convert(inputValue) {
+    inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
+
+    // Handle "[A" and "[k" mappings
+
+    inputValue = inputValue.replace(
+      /\[A/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\[k/g,
+      (match) => characterMapping[match] || match
+    );
+
+    inputValue = inputValue.replace(
+      /\.A/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\.k/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\/A/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\/k/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\?A/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\/k/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\'A/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\'k/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\HA/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\Hk/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\FA/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\Fk/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\{A/g,
+      (match) => characterMapping[match] || match
+    );
+    inputValue = inputValue.replace(
+      /\{k/g,
+      (match) => characterMapping[match] || match
+    );
+
+    inputValue = inputValue.replace(
+      /\[/g,
+      (match) => characterMapping[match] || match
+    );
+
+    let newInput = "";
+
+    for (let i = 0; i < inputValue.length; i++) {
+      const char = inputValue[i];
+
+      if (char === "[") {
+        const nextChar = inputValue[i + 1];
+        if (nextChar === "A" || nextChar === "k") {
+          newInput += characterMapping[char + nextChar] || char + nextChar;
+          i += 1; // Skip the next character ("A" or "k")
+        } else {
+          newInput += char;
+        }
+      } else if (char === ".") {
+        const nextChar = inputValue[i + 1];
+        if (nextChar === "A" || nextChar === "k") {
+          newInput += characterMapping[char + nextChar] || char + nextChar;
+          i += 1; // Skip the next character ("A" or "k")
+        } else {
+          newInput += char;
+        }
+      } else if (char === "?") {
+        const nextChar = inputValue[i + 1];
+        if (nextChar === "A" || nextChar === "k") {
+          newInput += characterMapping[char + nextChar] || char + nextChar;
+          i += 1; // Skip the next character ("A" or "k")
+        } else {
+          newInput += char;
+        }
+      } else if (char === "{") {
+        const nextChar = inputValue[i + 1];
+        if (nextChar === "A" || nextChar === "k") {
+          newInput += characterMapping[char + nextChar] || char + nextChar;
+          i += 1; // Skip the next character ("A" or "k")
+        } else {
+          newInput += char;
+        }
+      } else if (char === "H") {
+        const nextChar = inputValue[i + 1];
+        if (nextChar === "A" || nextChar === "k") {
+          newInput += characterMapping[char + nextChar] || char + nextChar;
+          i += 1; // Skip the next character ("A" or "k")
+        } else {
+          newInput += char;
+        }
+      } else if (char === "F") {
+        const nextChar = inputValue[i + 1];
+        if (nextChar === "A" || nextChar === "k") {
+          newInput += characterMapping[char + nextChar] || char + nextChar;
+          i += 1; // Skip the next character ("A" or "k")
+        } else {
+          newInput += char;
+        }
+      } else if (char === "'") {
+        const nextChar = inputValue[i + 1];
+        if (nextChar === "A" || nextChar === "k") {
+          newInput += characterMapping[char + nextChar] || char + nextChar;
+          i += 1; // Skip the next character ("A" or "k")
+        } else {
+          newInput += char;
+        }
+      } else if (char === "/") {
+        const nextChar = inputValue[i + 1];
+        if (nextChar === "A" || nextChar === "k") {
+          newInput += characterMapping[char + nextChar] || char + nextChar;
+          i += 1; // Skip the next character ("A" or "k")
+        } else {
+          newInput += char;
+        }
+      } else if (
+        (char === "A" || char === "k") &&
+        newInput[newInput.length - 1] === "अ"
+      ) {
+        newInput = newInput.slice(0, -1) + "आ";
+      } else if (char === "W" && newInput[newInput.length - 1] === "आ") {
+        newInput = newInput.slice(0, -1) + "ऑ";
+      } else if (char === "W" && newInput[newInput.length - 1] === "आ") {
+        newInput = newInput.slice(0, -1) + "ऑ";
+      } else if (char === "s" && newInput[newInput.length - 1] === "अ") {
+        newInput = newInput.slice(0, -1) + "ओ";
+      } else if (char === "Q" && newInput[newInput.length - 1] === "उ") {
+        newInput = newInput.slice(0, -1) + "ऊ";
+      } else if (char === "ॅ" && inputValue[i + 1] === "ं") {
+        newInput += "ँ";
+        i++;
+      } else {
+        newInput += characterMapping[char] || char;
+      }
+    }
+
+    setUserInput(newInput);
+  }
+
+  useDebounce(
+    () => {
+      convert(userInput);
+    },
+    [userInput],
+    500
+  );
 
   const handleKeyDown = (e) => {
     if (e.key === "Backspace") {
@@ -52,185 +230,24 @@ const HindiTypingSpace = ({
     if (timeLeft > 0) {
       console.log("Original inputValue:", e.target.value);
       let inputValue = e.target.value;
-      inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
 
-      // Handle "[A" and "[k" mappings
-
-      inputValue = inputValue.replace(
-        /\[/g,
-        (match) => characterMapping[match] || match
-      );
-
-      inputValue = inputValue.replace(
-        /\[A/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\[k/g,
-        (match) => characterMapping[match] || match
-      );
-
-      inputValue = inputValue.replace(
-        /\.A/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\.k/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\/A/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\/k/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\?A/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\/k/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\'A/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\'k/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\HA/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\Hk/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\FA/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\Fk/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\{A/g,
-        (match) => characterMapping[match] || match
-      );
-      inputValue = inputValue.replace(
-        /\{k/g,
-        (match) => characterMapping[match] || match
-      );
-
-      let newInput = "";
-
-      for (let i = 0; i < inputValue.length; i++) {
-        const char = inputValue[i];
-
-        if (char === "[") {
-          const nextChar = inputValue[i + 1];
-          if (nextChar === "A" || nextChar === "k") {
-            newInput += characterMapping[char + nextChar] || char + nextChar;
-            i += 1; // Skip the next character ("A" or "k")
-          } else {
-            newInput += char;
-          }
-        } else if (char === ".") {
-          const nextChar = inputValue[i + 1];
-          if (nextChar === "A" || nextChar === "k") {
-            newInput += characterMapping[char + nextChar] || char + nextChar;
-            i += 1; // Skip the next character ("A" or "k")
-          } else {
-            newInput += char;
-          }
-        } else if (char === "?") {
-          const nextChar = inputValue[i + 1];
-          if (nextChar === "A" || nextChar === "k") {
-            newInput += characterMapping[char + nextChar] || char + nextChar;
-            i += 1; // Skip the next character ("A" or "k")
-          } else {
-            newInput += char;
-          }
-        } else if (char === "{") {
-          const nextChar = inputValue[i + 1];
-          if (nextChar === "A" || nextChar === "k") {
-            newInput += characterMapping[char + nextChar] || char + nextChar;
-            i += 1; // Skip the next character ("A" or "k")
-          } else {
-            newInput += char;
-          }
-        } else if (char === "H") {
-          const nextChar = inputValue[i + 1];
-          if (nextChar === "A" || nextChar === "k") {
-            newInput += characterMapping[char + nextChar] || char + nextChar;
-            i += 1; // Skip the next character ("A" or "k")
-          } else {
-            newInput += char;
-          }
-        } else if (char === "F") {
-          const nextChar = inputValue[i + 1];
-          if (nextChar === "A" || nextChar === "k") {
-            newInput += characterMapping[char + nextChar] || char + nextChar;
-            i += 1; // Skip the next character ("A" or "k")
-          } else {
-            newInput += char;
-          }
-        } else if (char === "'") {
-          const nextChar = inputValue[i + 1];
-          if (nextChar === "A" || nextChar === "k") {
-            newInput += characterMapping[char + nextChar] || char + nextChar;
-            i += 1; // Skip the next character ("A" or "k")
-          } else {
-            newInput += char;
-          }
-        } else if (char === "/") {
-          const nextChar = inputValue[i + 1];
-          if (nextChar === "A" || nextChar === "k") {
-            newInput += characterMapping[char + nextChar] || char + nextChar;
-            i += 1; // Skip the next character ("A" or "k")
-          } else {
-            newInput += char;
-          }
-        } else if (
-          (char === "A" || char === "k") &&
-          newInput[newInput.length - 1] === "अ"
-        ) {
-          newInput = newInput.slice(0, -1) + "आ";
-        } else if (char === "W" && newInput[newInput.length - 1] === "आ") {
-          newInput = newInput.slice(0, -1) + "ऑ";
-        } else if (char === "W" && newInput[newInput.length - 1] === "आ") {
-          newInput = newInput.slice(0, -1) + "ऑ";
-        } else if (char === "s" && newInput[newInput.length - 1] === "अ") {
-          newInput = newInput.slice(0, -1) + "ओ";
-        } else if (char === "Q" && newInput[newInput.length - 1] === "उ") {
-          newInput = newInput.slice(0, -1) + "ऊ";
-        } else if (char === "ॅ" && inputValue[i + 1] === "ं") {
-          newInput += "ँ";
-          i++;
-        } else {
-          newInput += characterMapping[char] || char;
-        }
-      }
-
-      setUserInput(newInput);
+      setUserInput(inputValue);
 
       if (!hasStarted) {
         setHasStarted(true);
       }
 
-      if (newInput.endsWith(" ") || highlightedWordIndex === words.length - 1) {
+      if (
+        inputValue.endsWith(" ") ||
+        highlightedWordIndex === words.length - 1
+      ) {
         setHighlightedWordIndex((prevIndex) => prevIndex + 1);
-      } else if (!newInput.trim()) {
+      } else if (!inputValue.trim()) {
         setHighlightedWordIndex(0);
       }
 
       const currentWord = words[highlightedWordIndex];
-      const typedWord = newInput.split(" ")[highlightedWordIndex];
+      const typedWord = inputValue.split(" ")[highlightedWordIndex];
 
       if (
         currentWord === typedWord &&

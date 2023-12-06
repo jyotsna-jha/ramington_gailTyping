@@ -101,8 +101,6 @@ const characterMapping = {
   "\u00A9": "©", // Alt+0169 mapped to ©
   "\u00B9": "¹", // Alt+0185 mapped to ¹
   "\u0085": "•", // Alt+0149 mapped to •
-  
-
   /*  half characters */
 
   "'": "श्",
@@ -113,16 +111,16 @@ const characterMapping = {
   ".": "ण्",
   F: "थ्",
   H: "भ्",
-   "[": "ख्",  
+  "[": "ख्",
   /* making half characters complete */
   "[A": "ख",
-  "[k": "ख", 
+  "[k": "ख",
   ".A": "ण",
   ".k": "ण",
   "/A": "ध",
   "/k": "ध",
   "?A": "घ",
-  "?k": " घ",
+  "?k": "घ",
   "'A": "श",
   "'k": "श",
   '"A"': "ष",
@@ -132,7 +130,7 @@ const characterMapping = {
   FA: "थ",
   Fk: "थ",
   "{A": "क्ष",
-  "{k": "क्ष",  
+  "{k": "क्ष",
 };
 
 export default characterMapping;
