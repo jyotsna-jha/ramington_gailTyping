@@ -21,7 +21,8 @@ const HindiTypingSpace = ({
   const [backspaceCount, setBackspaceCount] = useState(0);
   const textAreaRef = useRef(null);
 
-  function convert(inputValue) {
+    function convert(inputValue) {
+    
     inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
 
     // Handle "[A" and "[k" mappings
@@ -188,7 +189,7 @@ const HindiTypingSpace = ({
     }
 
     setUserInput(newInput);
-  }
+  } 
 
   useDebounce(
     () => {
@@ -265,8 +266,6 @@ const HindiTypingSpace = ({
       console.log("Transformed inputValue:", inputValue);
     }
   };
-
-  // ... (rest of the code remains unchanged)
 
   useEffect(() => {
     if (!userInput) {
