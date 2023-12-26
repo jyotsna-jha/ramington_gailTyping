@@ -181,10 +181,7 @@ const HindiTypingSpace = ({
       setUserInput((prev) => prev + "झ");
       lastKeyPressed.current = ">";
     }
-    else if (e.key === ".") {
-      setUserInput((prev) => prev + "ण्");
-      lastKeyPressed.current = ".";
-    }
+    
     else if (e.key === "_") {
       setUserInput((prev) => prev + ".");
       lastKeyPressed.current = "_";
