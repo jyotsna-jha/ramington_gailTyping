@@ -99,7 +99,7 @@ const HindiTypingSpace = ({
     lastKeyPressed.current = e.key;
 
     // Custom logic to prevent certain keys
-    if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?",'"',"]","[","&","}","^","'",",","\\","<",">"].includes(e.key)) {
+    if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?",'"',"]","[","&","}","^","'",",","\\","<",">","_"].includes(e.key)) {
       e.preventDefault();
     }
     if (e.key === "|") {
@@ -181,6 +181,16 @@ const HindiTypingSpace = ({
       setUserInput((prev) => prev + "झ");
       lastKeyPressed.current = ">";
     }
+    else if (e.key === ".") {
+      setUserInput((prev) => prev + "ण्");
+      lastKeyPressed.current = ".";
+    }
+    else if (e.key === "_") {
+      setUserInput((prev) => prev + ".");
+      lastKeyPressed.current = "_";
+    }
+
+
    
     if (e.key === "Z" && userInput.endsWith("इ")) {
       // If the last characters are 'इ', replace them with 'ई'
@@ -256,6 +266,7 @@ const HindiTypingSpace = ({
         "/": "ध्",
         '"': "ष्",
         ",": "ए",
+        ".":"ण्",
        /*  "]": ",", */
         "\u003F": "?",
         "\u0022": "\"",
@@ -272,6 +283,7 @@ const HindiTypingSpace = ({
         "\u0023": "#",
         "\u003C": "<", // Alt+060 mapped to <
         "\u003E": ">", // Alt+062 mapped to >
+        _: ".",
     
 
       };
@@ -294,7 +306,7 @@ const HindiTypingSpace = ({
 
       inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
 
-      if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?",'"',"]","[","&","}","\\"].includes(e.key)) {
+      if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?",'"',"]","[","&","}","\\",".","_"].includes(e.key)) {
         inputValue = inputValue.slice(0, -1); // Remove the last character
       }
 
@@ -898,7 +910,7 @@ const HindiTypingSpace = ({
     console.log("Input Value:", inputValue);
     const userWords = inputValue.trim().split(/\s+/);
     console.log("User Words:", userWords);
-    const currentWord = words[highlightedWordIndex].trim();
+    const currentWord = words[highlightedWordIndex]?.trim();
     const typedWord = userWords[highlightedWordIndex]?.trim();
 
     console.log("Current Word:", currentWord);
