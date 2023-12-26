@@ -45,6 +45,7 @@ const TestResults = ({
             <td className="text-[#222f3e] p-2">Accuracy:</td>
             <td className="text-[#222f3e] p-2">{accuracy}%</td>
           </tr>
+          
           <tr>
             <td className="text-[#222f3e] p-2">Gross Speed:</td>
             <td className="text-[#222f3e] p-2">{grossSpeed} WPM</td>

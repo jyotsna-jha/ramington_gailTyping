@@ -272,8 +272,7 @@ const HindiTypingSpace = ({
         "\u0023": "#",
         "\u003C": "<", // Alt+060 mapped to <
         "\u003E": ">", // Alt+062 mapped to >
-        
-      
+    
 
       };
 
@@ -932,14 +931,26 @@ const HindiTypingSpace = ({
   }, [userInput]);
 
   useEffect(() => {
-    if (timeLeft === 0) {
+   /*  if (timeLeft === 0) {
       const userWords = userInput.trim().split(/\s+/);
       let correctWords = [];
       userWords.forEach((word, idx) => {
         if (word === words[idx]) {
           correctWords.push(word);
         }
-      });
+      }); */
+
+      if (timeLeft === 0) {
+        const userWords = userInput.trim().split(/\s+/);
+        let correctWords = [];
+        let wrongWords = [];
+        userWords.forEach((word, idx) => {
+          if (word === words[idx]) {
+            correctWords.push(word);
+          } else {
+            wrongWords.push(word);
+          }
+        });
       const totalWords = userWords.length;
       const correctWordsCount = correctWords.length;
       const wrongWordsCount = totalWords - correctWordsCount;
@@ -957,6 +968,8 @@ const HindiTypingSpace = ({
         grossSpeed,
         netSpeed,
         correctWords,
+        wrongWords,
+       
         [],
         backspaceCount
       );
