@@ -186,8 +186,6 @@ const HindiTypingSpace = ({
       setUserInput((prev) => prev + ".");
       lastKeyPressed.current = "_";
     }
-
-
    
     if (e.key === "Z" && userInput.endsWith("इ")) {
       // If the last characters are 'इ', replace them with 'ई'
@@ -978,9 +976,9 @@ const HindiTypingSpace = ({
         netSpeed,
         correctWords,
         wrongWords,
+        backspaceCount,
        
         [],
-        backspaceCount
       );
     }
   }, [timeLeft, userInput, onTestComplete, words, timeLimit]);
