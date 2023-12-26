@@ -99,7 +99,7 @@ const HindiTypingSpace = ({
     lastKeyPressed.current = e.key;
 
     // Custom logic to prevent certain keys
-    if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?"].includes(e.key)) {
+    if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?",'"',"]","[","&","}","^","'",",","\\","<",">"].includes(e.key)) {
       e.preventDefault();
     }
     if (e.key === "|") {
@@ -137,7 +137,51 @@ const HindiTypingSpace = ({
       setUserInput((prev) => prev + "घ्");
       lastKeyPressed.current = "?";
     }
-
+    else if (e.key === '"') {
+      setUserInput((prev) => prev + "ष्");
+      lastKeyPressed.current = '"';
+    }
+    else if (e.key === ']') {
+      setUserInput((prev) => prev + ",");
+      lastKeyPressed.current = ']';
+    }
+    else if (e.key === '[') {
+      setUserInput((prev) => prev + "ख्");
+      lastKeyPressed.current = '[';
+    }
+    else if (e.key === '&') {
+      setUserInput((prev) => prev + '"');
+      lastKeyPressed.current = '&';
+    }
+    else if (e.key === "}") {
+      setUserInput((prev) => prev + "द्व");
+      lastKeyPressed.current = "}";
+    }
+    else if (e.key === "^") {
+      setUserInput((prev) => prev + "'");
+      lastKeyPressed.current = "^";
+    }
+    else if (e.key === "'") {
+      setUserInput((prev) => prev + "श्");
+      lastKeyPressed.current = "'";
+    }
+    else if (e.key === ",") {
+      setUserInput((prev) => prev + "ए");
+      lastKeyPressed.current = ",";
+    }
+    else if (e.key === "\\") {
+      setUserInput((prev) => prev + ")");
+      lastKeyPressed.current = "\\";
+    }
+    else if (e.key === "<") {
+      setUserInput((prev) => prev + "ढ");
+      lastKeyPressed.current = "<";
+    }
+    else if (e.key === ">") {
+      setUserInput((prev) => prev + "झ");
+      lastKeyPressed.current = ">";
+    }
+   
     if (e.key === "Z" && userInput.endsWith("इ")) {
       // If the last characters are 'इ', replace them with 'ई'
       setUserInput((prev) => prev.slice(0, -1) + "ई");
@@ -208,17 +252,29 @@ const HindiTypingSpace = ({
         "@": "/",
         "^": "'",
         "&": '"',
-
         "'": "श्",
         "/": "ध्",
         '"': "ष्",
         ",": "ए",
-        "]": ",",
+       /*  "]": ",", */
         "\u003F": "?",
+        "\u0022": "\"",
+        "\u005D": "]",
+        "\u005B": "[",
+        "\u0026": "&",
+        "\u007D": "}", // Alt+0125 mapped to }
+        "\u005E": "^", // Alt+094 mapped to ^
+        "\u0027": "'", // Alt+039 mapped to '
+        "\u002C": ",", // Alt+044 mapped to ,
+        "\u005C": "\\", // Alt+092 mapped to \
+        "\u003A": ":", // Alt+058 mapped to :
+        "\u003B": ";", // Alt+059 mapped to ;
+        "\u0023": "#",
+        "\u003C": "<", // Alt+060 mapped to <
+        "\u003E": ">", // Alt+062 mapped to >
         
-        
-        
-       
+      
+
       };
 
       if (inputValue.length > 1) {
@@ -239,7 +295,7 @@ const HindiTypingSpace = ({
 
       inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
 
-      if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?"].includes(e.key)) {
+      if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?",'"',"]","[","&","}","\\"].includes(e.key)) {
         inputValue = inputValue.slice(0, -1); // Remove the last character
       }
 

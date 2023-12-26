@@ -98,9 +98,11 @@ const characterMapping = {
   "\u0084": '"', // Alt+0148 mapped to "
   "\u0082": "“", // Alt+0147 mapped to ,
   "\u007D": "}", // Alt+0125 mapped to }
-  /* "\u005D": "]",  */ // Alt+093 mapped to ]
+  "\u005D": "]", // Alt+093 mapped to ]
 
   /* "\u005C": "\\", // Alt+092 mapped to \ */
+  "\u0022": '"',
+  "}": "द्व",
 
   "{": "क्ष्‍",
 
@@ -154,7 +156,6 @@ $: "*",
   "?": "घ्",
   "?A": "घ",
   "?k": "घ",
-  
 };
 
 export default characterMapping;
