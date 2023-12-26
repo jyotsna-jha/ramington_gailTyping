@@ -65,7 +65,7 @@ const HindiTypingSpace = ({
     "'": "श्",
     '"': "ष्",
     "{": "क्ष्‍",
-    "?": "घ्",
+     "?": "घ्", 
     ".": "ण्",
     F: "थ्",
     H: "भ्",
@@ -76,8 +76,8 @@ const HindiTypingSpace = ({
     ".k": "ण",
     "/A": "ध",
     "/k": "ध",
-    "?A": "घ",
-    "?k": "घ",
+     "?A": "घ",
+    "?k": "घ", 
     "'A": "श",
     "'k": "श",
     '"A': "ष",
@@ -99,7 +99,7 @@ const HindiTypingSpace = ({
     lastKeyPressed.current = e.key;
 
     // Custom logic to prevent certain keys
-    if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";"].includes(e.key)) {
+    if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?"].includes(e.key)) {
       e.preventDefault();
     }
     if (e.key === "|") {
@@ -132,6 +132,10 @@ const HindiTypingSpace = ({
     } else if (e.key === ";") {
       setUserInput((prev) => prev + "य");
       lastKeyPressed.current = ";";
+    }
+    else if (e.key === "?") {
+      setUserInput((prev) => prev + "घ्");
+      lastKeyPressed.current = "?";
     }
 
     if (e.key === "Z" && userInput.endsWith("इ")) {
@@ -210,6 +214,11 @@ const HindiTypingSpace = ({
         '"': "ष्",
         ",": "ए",
         "]": ",",
+        "\u003F": "?",
+        
+        
+        
+       
       };
 
       if (inputValue.length > 1) {
@@ -230,7 +239,7 @@ const HindiTypingSpace = ({
 
       inputValue = inputValue.replace(/w/g, "ू").replace(/a/g, "ं");
 
-      if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";"].includes(e.key)) {
+      if (["!", "|", "(", "#", ":", "$", "*", "%", "-", ";","?"].includes(e.key)) {
         inputValue = inputValue.slice(0, -1); // Remove the last character
       }
 
@@ -241,23 +250,7 @@ const HindiTypingSpace = ({
       for (let i = 0; i < inputValue.length; i++) {
         const char = inputValue[i];
 
-        /* if (char === 'f') {
-          setIsFPressed(true);
-          if (!isIApplied) {
-            setIsIApplied(true);
-            newInput += 'ि';
-          }
-        } else if (isFPressed && (char === 'A' || char === 'k')) {
-          // Handle 'f' followed by 'A' or 'k'
-          setIsFPressed(false); // Reset isFPressed
-          newInput += characterMapping[char] + 'ि'; // Combine 'f' with the subsequent character
-        } else if (char === '[') {
-          // Handle '[' character separately
-          newInput += characterMapping[char];
-          setIsFPressed(false); // Reset isFPressed
-        }
- */
-         if (specialCharacterMapping.hasOwnProperty(char)) {
+           if (specialCharacterMapping.hasOwnProperty(char)) {
           // If the current character is one of the special characters, add it without further conversion
           newInput += char;
         } else if (char in charactersMapping) {
