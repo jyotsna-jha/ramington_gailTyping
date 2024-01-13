@@ -123,16 +123,7 @@ const HindiTypingSpace = ({
   
   ";":"य"
 
-
-
   };
-
-  const characters1Mapping = {
-    m: "उ",
-    Q: "फ",
-
-  };
-
   const handleKeyDown = (e) => {
     if (e.key === "Backspace") {
       setBackspaceCount((prevCount) => prevCount + 1);
@@ -339,7 +330,6 @@ const HindiTypingSpace = ({
        /*  _: ".", */
       };
 
-  
 
       if (inputValue.length > 1) {
         // If there are more than one characters in the input, handle special characters separately
@@ -394,25 +384,18 @@ const HindiTypingSpace = ({
         const char = inputValue[i];
        
         
-           if (specialCharacterMapping.hasOwnProperty(char)) {
+      if (specialCharacterMapping.hasOwnProperty(char)) {
           // If the current character is one of the special characters, add it without further conversion
           newInput += char;
         }    
 
-         else if (char in characters1Mapping) {
-          const mappedCharacter1 = characters1Mapping[char];
-         
-            if (char === "Q" && newInput[newInput.length - 1] === "उ") {
-            newInput = newInput.slice(0, -1) + "ऊ";
-          } else {
-            
-            newInput += mappedCharacter1;
-          }
-        }  
+        
         else if (char in charactersMapping) {
           const mappedCharacter = charactersMapping[char];
-        
-          if (isIApplied) {
+          if (char === "Q" && newInput[newInput.length - 1] === "उ") {
+            newInput = newInput.slice(0, -1) + "ऊ";
+          }
+          else if (isIApplied) {
             setIsIApplied(false);
         
             if (char === "[" && newInput.endsWith(charactersMapping["f"])) {
@@ -605,7 +588,6 @@ const HindiTypingSpace = ({
             newInput += "ा";
           }
         } 
-        
         
         else if (
           (char === "A" || char === "k") &&
@@ -801,8 +783,6 @@ const HindiTypingSpace = ({
             newInput += "ा";
           }
         }
-
-       
         
         
         else if (char === "?") {
